@@ -1,0 +1,85 @@
+#+TITLE: lambda-calculus, an interpreter for the lambda calculus
+
+* Description
+This program is an interpreter for the pure lambda calculus.
+
+The lambda terms have the following format:
+ - =A=, where =A= is a symbol (alpha characters)
+ - =(B C)=, where =B= and =C= are lambda terms
+ - =(lambda D E)=, where =D= is a symbol and =E= is a lambda term
+
+The =beta-reduce= function takes a lambda term and reduces it to its normal
+form using the beta-reduction rule.
+
+The =are-alpha-equivalent= function takes two lambda terms and indicates if
+they are equivalent with regard to alpha-conversion.
+
+* Examples
+The /basic-functions.lisp/ file contains the Church encodings of a few
+basic functions (logic, arithmetic, pairs, Y combinator).
+
+Load the interpreter and the basic functions:
+
+#+BEGIN_SRC lisp
+(load "lambda-calculus")
+(load "basic-functions")
+#+END_SRC
+
+A few examples:
+
+#+BEGIN_SRC lisp
+(lambda-calculus:beta-reduce '(lambda a (lambda b a)))
+-> (LAMBDA A (LAMBDA B A))
+#+END_SRC
+
+#+BEGIN_SRC lisp
+(lambda-calculus:beta-reduce '((lambda a (lambda b a)) x)
+-> (LAMBDA B X)
+#+END_SRC
+
+#+BEGIN_SRC lisp
+(lambda-calculus:beta-reduce true.)
+-> (LAMBDA A (LAMBDA B A))
+#+END_SRC
+
+#+BEGIN_SRC lisp
+(lambda-calculus:beta-reduce false.)
+-> (LAMBDA A (LAMBDA B B))
+#+END_SRC
+
+#+BEGIN_SRC lisp
+(lambda-calculus:beta-reduce one.)
+-> (LAMBDA F (LAMBDA X (F X)))
+#+END_SRC
+
+#+BEGIN_SRC lisp
+(lambda-calculus:beta-reduce `(,inc. ,one.))
+-> (LAMBDA F (LAMBDA X (F (F X))))
+#+END_SRC
+
+#+BEGIN_SRC lisp
+(lambda-calculus:beta-reduce `((,eq. (,inc. ,one.)) ,two.))
+-> (LAMBDA A (LAMBDA B A))
+#+END_SRC
+
+#+BEGIN_SRC lisp
+(lambda-calculus:are-alpha-equivalent '(lambda x x) '(lambda y y))
+-> T
+#+END_SRC
+
+#+BEGIN_SRC lisp
+(lambda-calculus:are-alpha-equivalent '(lambda x (x y)) '(lambda y x))
+-> NIL
+#+END_SRC
+
+#+BEGIN_SRC lisp
+(lambda-calculus:are-alpha-equivalent '(lambda x (lambda y (x y)))
+                                      '(lambda y (lambda x (y x))))
+-> T
+#+END_SRC
+
+#+BEGIN_SRC lisp
+(lambda-calculus:are-alpha-equivalent '(lambda x (lambda y (x y)))
+                                      '(lambda y (lambda x (x y))))
+-> NIL
+#+END_SRC
