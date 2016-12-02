@@ -103,3 +103,20 @@
                     ,one.)
                    ((,add. (f (,dec. n))) (f (,dec. (,dec. n))))))))
 (defvar fib. `(,Y. ,%fib))
+
+
+;;; Lists
+
+(defvar %len `(lambda f
+                (lambda l
+                  (((,if. (,null. l))
+                    ,zero.)
+                    (,inc. (f (,cdr. l)))))))
+(defvar len. `(,Y. ,%len))
+(defvar %append `(lambda f
+                   (lambda l
+                     (lambda m
+                       (((,if. (,null. l))
+                         m)
+                        ((,cons. (,car. l)) ((f (,cdr. l)) m)))))))
+(defvar append. `(,Y. ,%append))
