@@ -211,7 +211,12 @@ alpha-conversion."
       (error "~s is not a lambda term" term-1))
     (unless (is-lambda-term term-2)
       (error "~s is not a lambda term" term-2))
-    (are-equivalent-terms term-1 term-2 nil)))
+
+    (let ((free-vars-1 (free-variables term-1))
+          (free-vars-2 (free-variables term-2)))
+      (and (= (length free-vars-1) (length free-vars-2))
+           (are-equivalent-terms term-1 term-2 (pairlis free-vars-1
+                                                        free-vars-2))))))
 
 
 ;;; Fast interpreter
