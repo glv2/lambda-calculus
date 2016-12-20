@@ -20,7 +20,7 @@
 (defsystem lambda-calculus
   :name "lambda-calculus"
   :description "An interpreter for the lambda calculus"
-  :version "1.0"
+  :version "1.1"
   :author "Guillaume LE VAILLANT"
   :license "GPL-3"
   :components ((:file "lambda-calculus")))
