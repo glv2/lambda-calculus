@@ -177,8 +177,8 @@
   "Check if TERM-1 AND TERM-2 are equivalent lambda terms with regard to
 alpha-conversion."
   (labels ((are-equivalent-vars (var-1 var-2 vars)
-             (eq (position var-1 vars :key #'car)
-                 (position var-2 vars :key #'cdr)))
+             (eql (position var-1 vars :key #'car)
+                  (position var-2 vars :key #'cdr)))
 
            (are-equivalent-terms (term-1 term-2 vars)
              (cond
