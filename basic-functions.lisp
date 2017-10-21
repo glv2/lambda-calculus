@@ -105,6 +105,14 @@
 (defvar fib. `(,Y. ,%fib))
 
 
+;;; Recursion using the ϴ combinator
+
+(defvar theta. '((lambda x (lambda y (y ((x x) y))))
+                 (lambda x (lambda y (y ((x x) y))))))
+
+;; factorial
+(defvar fac2. `(,theta. ,%fac))
+
 ;;; Lists
 
 (defvar %len `(lambda f
