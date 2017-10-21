@@ -46,13 +46,9 @@
   (and (listp list)
        (= (length list) n)))
 
-(defun alphap (sym)
-  (reduce (lambda (x y) (and x y)) (symbol-name sym) :key #'alpha-char-p))
-
 (defun is-variable (term)
   (and (symbolp term)
-       (not (eq term 'lambda))
-       (alphap term)))
+       (not (eq term 'lambda))))
 
 (defun is-application (term)
   (lengthp term 2))
@@ -327,7 +323,7 @@ alpha-conversion."
 (defun full-name-of (var)
   (let ((nam (nam-of var))
         (ren (ren-of var)))
-    (read-from-string (format nil "~a~:[~d~;~]" nam (zerop ren) ren))))
+    (read-from-string (format nil "~a~:[_~d~;~]" nam (zerop ren) ren))))
 
 (defun unrepresent (term)
   (cond
