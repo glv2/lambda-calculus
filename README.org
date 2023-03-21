@@ -1,5 +1,7 @@
 #+TITLE: lambda-calculus, an interpreter for the lambda calculus
 
+The active repository is at https://codeberg.org/glv/lambda-calculus
+
 * Description
 This program is an interpreter for the pure lambda calculus.
 
